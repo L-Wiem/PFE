@@ -1,0 +1,18 @@
+CabinetBundle\Entity\Antecedent:
+    type: entity
+    table: antecedent
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: string
+        valeur:
+            type: string
+    manyToOne:
+        patient:
+            targetEntity: Patient
+            inversedBy: antecedents

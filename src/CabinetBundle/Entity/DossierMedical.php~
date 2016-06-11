@@ -1,0 +1,70 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Wiem
+ * Date: 29/03/2016
+ * Time: 11:00
+ */
+
+namespace CabinetBundle\Entity;
+
+
+class DossierMedical
+{
+    /** @var  integer */
+    private $id;
+    /** @var  \DateTime */
+    private $dateCreation;
+    /** @var  Patient */
+    private $patient;
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
+    }
+
+    /**
+     * @param \DateTime $dateCreation
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return Patient
+     */
+    public function getPatient()
+    {
+        return $this->patient;
+    }
+
+    /**
+     * @param Patient $patient
+     */
+    public function setPatient($patient)
+    {
+        $this->patient = $patient;
+    }
+
+    
+}

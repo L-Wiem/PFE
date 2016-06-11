@@ -1,0 +1,12 @@
+.main {
+    width: 60%;
+    margin: 0 20%;
+    border: 1px solid;
+    padding: 10px 20px;
+    font-family: sans-serif;
+}
+
+.footer-dc {
+    margin: 50px 20px 50px 0;
+    text-align: right;
+}

@@ -1,0 +1,12 @@
+UserBundle\Entity\User.php:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [username]
+            message: Cet nom d'utilisateur existe déjà. Veuillez entrer un autre nom d'utilisateur
+    properties:
+        username:
+            - NotBlank:
+                message: le champ nom d'utilisateur est obligatoire
+        password:
+            - NotBlank:
+                message: le champ mot de passe est obligatoire

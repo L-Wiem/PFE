@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <!-- /span6 -->
+    <div class="span12">
+        <div class="widget widget-table action-table">
+            <div class="widget-header"><i class="icon-user"></i>
+                <h3>Liste des demandes d'utilisateur mobiles </h3>
+
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th> Utilisateur</th>
+                        <th> Date de naissance</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for mobileUser in mobileUsers %}
+                        <tr>
+                            <td> {{ mobileUser.nom }} {{ mobileUser.prenom }} </td>
+                            <td> {{ mobileUser.dateNaissance|date('d-m-Y') }} </td>
+                            <td>
+                                <a href="{{ path('ajout_from_user' , {'id': mobileUser.id} ) }}"
+                                   class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i>Créer Patient</a>
+                                <a href="{{ path('rejet_user' , {'id': mobileUser.id}) }}"
+                                   class="btn btn-danger btn-small"><i class="btn-icon-only icon-trash"> </i>Rejeter</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /widget-content -->
+        </div>
+        <!-- /widget -->
+    </div>
+    <!-- /span6 -->
+    <div class="span6">
+
+    </div>
+{% endblock %}

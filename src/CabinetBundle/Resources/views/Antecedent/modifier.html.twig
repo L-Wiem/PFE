@@ -1,0 +1,9 @@
+<form method="post" action="{{ path('modifier_antecedent', {'id': antecedent.id}) }}" class="form-sauvegarder-antecedent">
+{{ form_errors(form) }}
+
+    {{ form_row(form.type) }}
+    {{ form_row(form.valeur) }}
+    {{ form_row(form._token) }}
+
+
+{{ form_end(form) }}

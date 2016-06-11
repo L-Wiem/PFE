@@ -1,0 +1,19 @@
+CabinetBundle\Entity\Medicament:
+    type: entity
+    table: medicament
+    repositoryClass: CabinetBundle\Entity\MedicamentRepository
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+        nom:
+            type:string
+    oneToMany:
+        prescriptions:
+            targetEntity: Prescription
+            mappedBy: medicament

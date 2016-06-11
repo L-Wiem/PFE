@@ -1,0 +1,10 @@
+<form method="post" action="{{ path('modifier_patientMaladie', {'id': maladie.id}) }}" class="form-sauvegarder-maladie">
+    {{ form_errors(form) }}
+
+    {{ form_row(form.nom) }}
+    {{ form_row(form.stade) }}
+    {{ form_row(form.symptome) }}
+    {{ form_row(form.datePrescription) }}
+    {{ form_row(form._token) }}
+
+</form>

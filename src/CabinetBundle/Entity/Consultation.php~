@@ -1,0 +1,144 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Wiem
+ * Date: 29/03/2016
+ * Time: 11:09
+ */
+
+namespace CabinetBundle\Entity;
+
+
+use Doctrine\Common\Collections\ArrayCollection;
+
+class Consultation
+{
+    /** @var  integer */
+    private $id;
+    /** @var  string */
+    private $description;
+    /** @var  Patient */
+    private $patient;
+    /** @var  Ordonnance */
+    private $ordonnance;
+    /** @var  Traitement[]|ArrayCollection */
+    private $traitements;
+    /** @var  Analyse[]|ArrayCollection */
+    private $analyses;
+    /** @var  Rdv */
+    private $rdv;
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return Patient
+     */
+    public function getPatient()
+    {
+        return $this->patient;
+    }
+
+    /**
+     * @param Patient $patient
+     */
+    public function setPatient($patient)
+    {
+        $this->patient = $patient;
+    }
+
+    /**
+     * @return Ordonnance
+     */
+    public function getOrdonnance()
+    {
+        return $this->ordonnance;
+    }
+
+    /**
+     * @param Ordonnance $ordonnance
+     */
+    public function setOrdonnance($ordonnance)
+    {
+        $this->ordonnance = $ordonnance;
+    }
+
+    /**
+     * @return Traitement[]|ArrayCollection
+     */
+    public function getTraitements()
+    {
+        return $this->traitements;
+    }
+
+    /**
+     * @param Traitement[]|ArrayCollection $traitements
+     */
+    public function setTraitements($traitements)
+    {
+        $this->traitements = $traitements;
+    }
+
+    /**
+     * @return Analyse[]|ArrayCollection
+     */
+    public function getAnalyses()
+    {
+        return $this->analyses;
+    }
+
+    /**
+     * @param Analyse[]|ArrayCollection $analyses
+     */
+    public function setAnalyses($analyses)
+    {
+        $this->analyses = $analyses;
+    }
+
+    /**
+     * @return Rdv
+     */
+    public function getRdv()
+    {
+        return $this->rdv;
+    }
+
+    /**
+     * @param Rdv $rdv
+     */
+    public function setRdv($rdv)
+    {
+        $this->rdv = $rdv;
+    }
+    
+
+}

@@ -1,0 +1,10 @@
+<form method="post" action="{{ path('ajout_description', {'id': ordonnance.id}) }}" class="form-sauvegarder-medicament">
+{{ form_errors(form) }}
+
+        {{ form_row(form.medicament) }}
+        {{ form_row(form.quantite) }}
+        {{ form_row(form.duree) }}
+        {{ form_row(form._token) }}
+
+
+{{ form_end(form) }}

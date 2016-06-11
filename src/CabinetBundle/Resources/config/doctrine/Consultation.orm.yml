@@ -1,0 +1,32 @@
+CabinetBundle\Entity\Consultation:
+    type: entity
+    table: consultation
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        motif:
+            type: string
+            nullable: true
+    manyToOne:
+        patient:
+            targetEntity: Patient
+            inversedBy: consultations
+    oneToOne:
+        ordonnance:
+            targetEntity: Ordonnance
+            inversedBy: consultation
+            cascade: [persist]
+        rdv:
+            targetEntity: Rdv
+            mappedBy: consultation
+    oneToMany:
+        examensCliniques:
+            targetEntity: ExamenClinique
+            mappedBy: consultation
+        analyses:
+            targetEntity: Analyse
+            mappedBy: consultation

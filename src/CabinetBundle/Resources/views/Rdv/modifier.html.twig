@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <div class="row">
+        <div class="span12">
+            <div class="widget ">
+                <div class="widget-header">
+                    <i class="icon-user"></i> <h3>Modifier un rendez-vous</h3>
+                </div> <!-- /widget-header -->
+                <div class="widget-content row">
+                    {{ form_start(form) }}
+
+                    {{ form_errors(form) }}
+
+                    {{ form_row(form.patient) }}
+                    {{ form_row(form.date) }}
+                    {{ form_row(form.heure) }}
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script>
+
+        jQuery(document).ready(function(){
+            $(".liste_patient").chosen();
+        });
+
+    </script>
+{% endblock %}

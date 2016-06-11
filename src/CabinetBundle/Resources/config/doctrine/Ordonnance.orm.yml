@@ -1,0 +1,24 @@
+CabinetBundle\Entity\Ordonnance:
+    type: entity
+    table: ordonnance
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        description:
+            type: string
+            nullable: true
+        conge:
+            type: string
+            nullable: true
+    oneToOne:
+        consultation:
+            targetEntity: Consultation
+            mappedBy: ordonnance
+    oneToMany:
+        prescriptions:
+            targetEntity: Prescription
+            mappedBy: ordonnance

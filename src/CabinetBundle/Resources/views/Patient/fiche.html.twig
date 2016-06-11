@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <!-- /span6 -->
+    <div class="span12">
+        <div class="widget widget-table action-table">
+            <div class="widget-header"> <i class="icon-user"></i>
+                <h3>Fiche de : {{ patient.nomComplet }}</h3>
+
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th> Code </th>
+                        <th> Patient </th>
+                        <th> Date de naissance </th>
+                        <th> Genre </th>
+                        <th> Etat civile </th>
+                        <th> Adresse </th>
+                        <th> Numero de telephone </th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{ patient.code }} </td>
+                            <td> {{ patient.nomComplet }} </td>
+                            <td> {{ patient.dateNaissance|date('d/m/Y') }} </td>
+                            <td> {{ patient.genre }} </td>
+                            <td> {{ patient.etatCivil }} </td>
+                            <td> {{ patient.adresse }} </td>
+                            <td> {{ patient.numTel }} </td>
+                            <td>
+                                <a href="{{ path('modifier_patient' , {'id': patient.id} ) }}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i>Modifier</a>
+                                {#<a href="{{ path('supprimer_patient' , {'id': patient.id}) }}" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i>Supprimer</a></td>#}
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /widget-content -->
+        </div>
+        <!-- /widget -->
+    </div>
+    <!-- /span6 -->
+    <div class="span6">
+
+    </div>
+{% endblock %}

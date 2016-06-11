@@ -1,0 +1,159 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <!-- /span6 -->
+
+    <div class="row">
+        <div class="span4">
+            <div class="widget widget-table action-table">
+                <div class="widget-header"><i class="icon-th-list"></i>
+                    <h3>Dossier medicale de {{ patient.nomComplet }} </h3>
+                </div>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th> Patient</th>
+                        <td> {{ patient.nomComplet }} </td>
+                    </tr>
+                    <tr>
+                        <th> Date de naissance</th>
+                        <td> {{ patient.dateNaissance|date('d/m/Y') }} </td>
+
+                    </tr>
+                    <tr>
+                        <th> Adresse</th>
+                        <td> {{ patient.adresse }} </td>
+
+                    </tr>
+                    <tr>
+                        <th> Numero de telephone</th>
+                        <td> {{ patient.numTel }} </td>
+
+                    </tr>
+                    <tr>
+                        <th> Genre</th>
+                        <td> {{ patient.genre }} </td>
+                    </tr>
+                    </thead>
+                </table>
+                <div class="widget panel-success">
+                    <h2>Les antecedents: </h2>
+                    <p>Rien a signaler.</p>
+                </div>
+                <div class="panel panel-success">
+                    <h2> Diagnostic: </h2>
+                    {% for maladie in patient.maladies %}
+                        <ul>
+                        <li>
+                            <strong>Nom</strong>
+                            <p>
+                                {{ maladie.nom }}
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Stade</strong>
+                            <p>
+                                {{ maladie.stade }}
+                            </p>
+                        </li>
+                    {% else %}
+                        <p>Rien a signaler</p>
+                    {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+            <!-- /widget-content -->
+        </div>
+        <div class="span8">
+            <div id="accordion">
+                {% for consultation in patient.consultations %}
+                    <h3> Consultation de {{ consultation.rdv.date|date('d/m/Y') }}. Les motifs de consultation: {{ consultation.motif }}</h3>
+                    <div>
+                        <ul>
+                            <li><strong>Motif de consultation:</strong>
+                                <p>
+                                    {{ consultation.motif }}
+                                </p>
+
+                            </li>
+                            <li>
+                                <strong>
+                                    Description de l'ordonnance
+                                </strong>
+                                <p>
+                                    {{ consultation.ordonnance.description }}
+                                </p>
+                            </li>
+                            <li>
+                                <strong>
+                                    Certification
+                                </strong>
+                                <p>
+                                    {{ consultation.ordonnance.conge }}
+                                </p>
+                            </li>
+                            <li>
+                                <strong>
+                                    Analyses
+                                </strong>
+                                <ul>
+                                    {% for analyse in consultation.analyses %}
+                                        <li>
+                                            <strong>Type</strong>
+                                            <p>
+                                                {{ analyse.type }}
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <strong>Date</strong>
+                                            <p>
+                                                {{ analyse.date|date("d/m/Y") }}
+                                            </p>
+                                        </li>
+                                    {% else %}
+                                        <p>Pas d'analyses demandés</p>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>
+                                    Examens cliniques
+                                </strong>
+                                <ul>
+                                    {% for examen in consultation.examensCliniques %}
+                            <li>
+                                <strong>Type</strong>
+                                <p>
+                                    {{ examen.type }}
+                                </p>
+                            </li>
+                            <li>
+                                <strong>Valeur</strong>
+                                <p>
+                                    {{ examen.resultat }}
+                                </p>
+                            </li>
+                            {% else %}
+                                <p>Rien a signaler</p>
+                            {% endfor %}
+                        </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        $("#accordion").accordion({
+            collapsible: true,
+            heightStyle: "content"
+        });
+    </script>
+{% endblock %}

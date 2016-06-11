@@ -1,0 +1,21 @@
+CabinetBundle\Entity\Prescription:
+    type: entity
+    table: prescription
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        quantite:
+            type: integer
+        duree:
+            type: string
+    manyToOne:
+        ordonnance:
+            targetEntity: Ordonnance
+            inversedBy: prescriptions
+        medicament:
+            targetEntity: Medicament
+            inversedBy: prescriptions

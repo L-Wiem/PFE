@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <!-- /span6 -->
+    <div class="span12">
+        <div class="widget widget-table action-table">
+            <div class="widget-header"> <i class="icon-user"></i>
+                <h3>Liste des demandes de RDV</h3>
+
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th> Patient </th>
+                        <th> Date </th>
+                        <th> Heure </th>
+                        <th> Preferences </th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for demande in demandesRdvs %}
+
+                        <tr>
+                            <td> {{ demande.patient.nomComplet }} </td>
+                            <td> {{ demande.dateRdv|date('d/m/Y') }} </td>
+                            <td> {{ demande.heureRdv|date('H:i') }} </td>
+                            <td> {{ demande.preferences }} </td>
+                            <td>
+                                <a href="{{ path('ajout_rdv_from_mobile', {'id': demande.id}) }}" class="btn btn-success">Ajouter rendez-vous</a>
+                                <a href="{{ path('rejet_demande' , {'id': demande.id}) }}" class="btn btn-danger btn-small"><i class="btn-icon-only icon-trash"> </i>Rejeter</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /widget-content -->
+        </div>
+        <!-- /widget -->
+    </div>
+
+{% endblock %}

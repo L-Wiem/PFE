@@ -1,0 +1,70 @@
+CabinetBundle\Entity\Patient:
+    type: entity
+    table: patient
+    repositoryClass: CabinetBundle\Entity\PatientRepository
+
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            length: 10
+            nullable: true
+        nom:
+            type: string
+            length: 30
+        prenom:
+            type: string
+            length: 30
+        dateNaissance:
+            type: date
+            nullable: true
+        etatCivil:
+            type: string
+            length: 20
+        adresse:
+            type: string
+            length: 150
+            nullable: true
+        numTel:
+            type: string
+            length: 20
+            nullable: true
+        genre:
+            type: string
+            length: 10
+            nullable: true
+
+    manyToOne:
+        creePar:
+            targetEntity: Secretaire
+            inversedBy: patients
+    oneToMany:
+        consultations:
+            targetEntity: Consultation
+            mappedBy: patient
+        rdvs:
+            targetEntity: Rdv
+            mappedBy: patient
+        maladies:
+            targetEntity: Maladie
+            mappedBy: patient
+        antecedents:
+            targetEntity: Antecedent
+            mappedBy: patient
+        demandesRdvs:
+            targetEntity: CabinetBundle\Entity\DemandeRdv
+            mappedBy: patient
+    manyToMany:
+        securiteSocials:
+            targetEntity: SecuriteSocial
+            inversedBy: patients
+    oneToOne:
+        mobileUser:
+            targetEntity: UserBundle\Entity\MobileUser
+            mappedBy: patient
+            cascade: [persist]

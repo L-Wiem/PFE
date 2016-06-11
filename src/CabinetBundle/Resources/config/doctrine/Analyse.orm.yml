@@ -1,0 +1,18 @@
+CabinetBundle\Entity\Analyse:
+    type: entity
+    table: analyse
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: date
+        type:
+            type: string
+    manyToOne:
+        consultation:
+            targetEntity: Consultation
+            inversedBy: analyses

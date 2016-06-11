@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <!-- /span6 -->
+    <div class="span6">
+        <div class="widget widget-table action-table">
+            <div class="widget-header"> <i class="icon-th-list"></i>
+                <h3>Liste des maladies</h3>
+                <a href="{{ path('ajout_maladie') }}" class="btn btn-success">Ajouter Maladie</a>
+
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th> Nom</th>
+                        <th> Symptomes</th>
+                        <th> Stade</th>
+                        <th> Date de prescription</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for maladie in maladies %}
+                        <tr>
+                            <td> {{ maladie.nom}} </td>
+                            <td> {{ maladie.symptome}} </td>
+                            <td> {{ maladie.stade}} </td>
+                            <td> {{ maladie.datePrescription|date('d/m/Y') }} </td>
+
+                            <td>
+                                <a href="{{ path('modifier_maladie' , {'id': maladie.id} ) }}" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i>Modifier</a>
+                                <a href="{{ path('supprimer_maladie' , {'id': maladie.id}) }}" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i>Supprimer</a></td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /widget-content -->
+        </div>
+        <!-- /widget -->
+    </div>
+    <!-- /span6 -->
+    <div class="span6">
+
+    </div>
+{% endblock %}

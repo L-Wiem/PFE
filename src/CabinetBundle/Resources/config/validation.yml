@@ -1,0 +1,183 @@
+CabinetBundle\Entity\Secretaire:
+    properties:
+        nom:
+            - NotBlank:
+                message: le champ nom est obligatoire
+        prenom:
+            - NotBlank:
+                message: le champ prénom est obligatoire
+        dateNaissance:
+            - NotBlank:
+                message: le champ date de naissance est obligatoire
+            - Date: ~
+        numTel:
+            - NotBlank:
+                message: le numéro de téléphone est obligatoire
+            - Length:
+                min: 8
+                max: 8
+                exactMessage: le numéro de téléphone doit contenir 8 chiffres
+
+        genre:
+            - NotBlank:
+                message: le champ genre est obligatoire
+        cin:
+            - NotBlank:
+                message: le champ cin est obligatoire
+            - Length:
+                min: 8
+                max: 8
+                exactMessage: le numéro de cin doit contenir 8 chiffres
+        numContrat:
+            - NotBlank:
+                message: le numéro de contrat est obligatoire
+        dateDebContrat:
+            - NotBlank:
+                message: la date de début de contrat est obligatoire
+            - Date: ~
+        dateFinContrat:
+            - NotBlank:
+                 message: la date de fin de contrat est obligatoire
+            - Date: ~
+#Medecin:
+CabinetBundle\Entity\Medecin:
+    properties:
+        nom:
+            - NotBlank:
+                message: le champ nom est obligatoire
+            - Type:
+                type: string
+                message: La valeur saisie n'est pas valide.
+        prenom:
+            - NotBlank:
+                message: le champ prénom est obligatoire
+            - Type:
+                type: string
+                message: La valeur saisie n'est pas valide.
+        dateNaissance:
+            - NotBlank:
+                message: le champ date de naissance est obligatoire
+            - Date: ~
+        numTel:
+            - NotBlank:
+                message: le numéro de téléphone est obligatoire
+            - Length:
+                min: 8
+                max: 8
+                exactMessage: le numéro de téléphone doit contenir 8 chiffres
+        genre:
+            - NotBlank:
+                message: le champ genre est obligatoire
+CabinetBundle\Entity\Analyse:
+    properties:
+        date:
+            - NotBlank:
+                message: veuillez indiquer la date d'analyse
+            - Date: ~
+            - Range:
+                min: "today"
+                minMessage: Date invalide
+        type:
+            - NotBlank:
+                message: le champ type est obligatoire
+            - Type:
+                type: string
+                message: La valeur saisie n'est pas valide
+
+CabinetBundle\Entity\ExamenClinique:
+    properties:
+        type:
+            - Type:
+                type: string
+                message: La valeur saisie n'est pas valide.
+        resultat:
+            - Type:
+                type: string
+                message: La valeur saisie n'est pas valide
+
+CabinetBundle\Entity\Rdv:
+    properties:
+        date:
+            - NotBlank:
+                message: veuillez indiquer la date du RDV
+            - Date: ~
+            - Range:
+                min: "today"
+                minMessage: Date invalide
+        heure:
+            - NotBlank:
+                message: veuillez indiquer l'heure du RDV
+            - Time: ~
+    constraints:
+        - Callback: [validerHeure]
+        - CabinetBundle\Validator\Constraints\HeureRDV: ~
+
+CabinetBundle\Entity\Medicament:
+    properties:
+        code:
+            - NotBlank:
+                message: veuillez le code du medicament
+        nom:
+            - NotBlank:
+                message: veuillez la nom du medicament
+            - Type:
+                type: string
+                message: La valeur saisie n'est pas valide
+
+CabinetBundle\Entity\Maladie:
+    properties:
+        nom:
+            - NotBlank:
+                message: veuillez le nom de la maladie
+            - Type:
+                type: string
+                message: La valeur saisie n'est pas valide.
+        symptome:
+            - NotBlank:
+                message: veuillez les symptomes de la maladie
+            - Type:
+                type: string
+                message: La valeur saisie n'est pas valide.
+        stade:
+            - NotBlank:
+                message: veuillez la stade de la maladie
+        datePrescription:
+            - NotBlank:
+                message: veuillez la date de diagnostic
+            - Date: ~
+            - Range:
+                min: "today"
+                minMessage: Date invalide
+
+#Patients:
+#CabinetBundle\Entity\Patient:
+#    properties:
+#        nom:
+#            - NotBlank:
+#                message: le champ nom est obligatoire
+#            - Type:
+#                type: string
+#                message: La valeur {{ nom }} n'est pas un {{ type }}.
+#        prenom:
+#            - NotBlank:
+#                message: le champ prénom est obligatoire
+#            - Type:
+#                type: string
+#                message: La valeur saisie n'est pas valide.
+#        dateNaissance:
+#            - NotBlank:
+#                message: le champ date de naissance est obligatoire
+#            - Date: ~
+#        adresse:
+#            - NotBlank:
+#                message: le champ adresse est obligatoire
+#        numTel:
+#            - NotBlank:
+#                message: le numéro de téléphone est obligatoire
+#            - Length:
+#                min: 8
+#                max: 8
+#                exactMessage: le numéro de téléphone doit etre de 8 chiffres
+#        genre:
+#            - NotBlank:
+#                message: le champ genre est obligatoire

@@ -1,0 +1,39 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        UserBundle\Entity\User: sha512
+
+    role_hierarchy:
+        ROLE_SECRETAIRE: ROLE_SECRETAIRE
+        ROLE_MEDECIN: [ROLE_SECRETAIRE, ROLE_MEDECIN ]
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        cabinet:
+            entity: { class: UserBundle:User, property: username }
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            provider: cabinet
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                default_target_path: liste_rdv
+            logout:
+                path:   /logout
+                target: /
+            anonymous: true
+
+    access_control:
+        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/configuration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/secretaires, roles: ROLE_MEDECIN}
+        - { path: ^/commencer-consultation, roles: ROLE_MEDECIN}
+        - { path: ^/dossier-medical, roles: ROLE_MEDECIN}
+        - { path: ^/, roles: ROLE_SECRETAIRE}

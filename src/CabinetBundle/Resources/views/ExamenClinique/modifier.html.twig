@@ -1,0 +1,8 @@
+<form method="post" action="{{ path('modifier_examen', {'id': examenClinique.id}) }}" class="form-sauvegarder-examen" >
+    {{ form_errors(form) }}
+
+    {{ form_row(form.type) }}
+    {{ form_row(form.resultat) }}
+    {{ form_row(form._token) }}
+</form>
+

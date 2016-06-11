@@ -1,0 +1,640 @@
+{% extends "base.html.twig" %}
+{% block main %}
+
+    <div class="row">
+        <div class="span6">
+            {{ form_start(form) }}
+            <div class="widget ">
+                <div class="widget-header">
+                    <i class="icon-user"></i>
+                    <h3>Commencer la consultation avec {{ rdv.patient.nomComplet }} {{ rdv.date|date('d/m/Y') }}</h3>
+                </div> <!-- /widget-header -->
+                <div class="widget-content">
+
+                    {{ form_errors(form) }}
+
+                    {{ form_row(form.motif) }}
+
+
+                    <button type="submit" class="btn btn-primary pull-right">Enregistrer</button>
+
+                </div>
+            </div>
+            <div class="widget ">
+                <div class="widget-header">
+                    <i class="icon-list"></i>
+                    <h3>Examens Cliniques</h3>
+                </div> <!-- /widget-header -->
+                <div class="widget-content">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th> Type</th>
+                            <th> Resultat</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for examenClinique in consultation.examensCliniques %}
+                            <tr>
+                                <td>{{ examenClinique.type }}</td>
+                                <td>{{ examenClinique.resultat }}</td>
+                                <td>
+                                    <button type="button"
+                                            url_modification="{{ path( 'modifier_examen',{'id':examenClinique.id} ) }}"
+                                            class="btn btn-small button-modifier-examen">Modifier
+                                    </button>
+                                    <button type="button"
+                                            url_suppression="{{ path( 'supprimer_examen',{'id':examenClinique.id} ) }}"
+                                            class="btn btn-small btn-supprimer-examen">Supprimer
+                                    </button>
+
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Pas d'examens cliniques</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <button type="button" id="btn-ajout-examen" class="btn btn-success">Ajouter un examen clinique
+                    </button>
+                </div>
+            </div>
+
+           <div class="widget ">
+                <div class="widget-header">
+                    <i class="icon-list"></i>
+                    <h3>Diagnostic</h3>
+                </div> <!-- /widget-header -->
+                <div class="widget-content">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th> Nom</th>
+                            <th>Stade</th>
+                            <th>Symptome</th>
+                            <th>Date diagnostic</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for maladie in consultation.patient.maladies %}
+                            <tr>
+                                <td>{{ maladie.nom }}</td>
+                                <td>{{ maladie.stade }}</td>
+                                <td>{{ maladie.symptome }}</td>
+                                <td>{{ maladie.datePrescription|date('d/m/Y') }}</td>
+                                <td>
+                                    <button type="button"
+                                            url_modification="{{ path( 'modifier_patientMaladie',{'id':maladie.id} ) }}"
+                                            class="btn btn-small button-modifier-maladie">Modifier
+                                    </button>
+                                    <button type="button"
+                                            url_suppression="{{ path( 'supprimer_patientMaladie',{'id':maladie.id} ) }}"
+                                            class="btn btn-small btn-supprimer-maladie">Supprimer
+                                    </button>
+
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Pas de maladies</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <button type="button" id="btn-ajout-maladie" class="btn btn-success">Ajouter une maladie
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="span6">
+     <div class="widget ">
+                <div class=" widget-header">
+                    <i class="icon ui-icon-tag"></i>
+                    <h3 >Les antecedents</h3>
+                </div> <!-- /widget-header -->
+                <div class="widget-content">
+
+
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th> Type</th>
+                            <th> Valeur</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for antecedent in consultation.patient.antecedents %}
+                            <tr>
+                                <td>{{ antecedent.type }}</td>
+                                <td>{{ antecedent.valeur }}</td>
+                                <td>
+                                    <button type="button"
+                                            url_modification="{{ path( 'modifier_antecedent',{'id':antecedent.id} ) }}"
+                                            class="btn btn-small button-modifier-antecedent">Modifier
+                                    </button>
+                                    <button type="button"
+                                            url_suppression="{{ path( 'supprimer_antecedent',{'id':antecedent.id} ) }}"
+                                            class="btn btn-small btn-supprimer-analyse">Supprimer
+                                    </button>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">Rien a signaler</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <button type="button" id="btn-ajout-antecedent" class="btn btn-success">Ajouter un antecedent</button>
+                </div>
+            </div>
+
+            <div class="widget " id="ajout-analyse-modal">
+                <div class="widget-header">
+                    <i class="icon-user"></i>
+                    <h3>Ajouter un analyse</h3>
+                </div> <!-- /widget-header -->
+                <div class="widget-content">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th> Type</th>
+                            <th> Date</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for analyse in consultation.analyses %}
+                            <tr>
+                                <td>{{ analyse.type }}</td>
+                                <td>{{ analyse.date|date('d/m/Y') }}</td>
+                                <td>
+                                    <button type="button"
+                                            url_modification="{{ path( 'modifier_analyse',{'id':analyse.id} ) }}"
+                                            class="btn btn-small button-modifier-analyse">Modifier
+                                    </button>
+                                    <button type="button"
+                                            url_suppression="{{ path( 'supprimer_analyse',{'id':analyse.id} ) }}"
+                                            class="btn btn-small btn-supprimer-analyse">Supprimer
+                                    </button>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">Pas d'analyse</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <button type="button" id="btn-ajout-analyse" class="btn btn-success">Donner un analyse</button>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="widget ">
+                <div class="widget-header">
+                    <i class="ui-icon-notice"></i>
+                    <h3>Ordonnance</h3>
+                </div> <!-- /widget-header -->
+                <div class="widget-content ">
+                    {{ form_row(form.ordonnance.description) }}
+                    {{ form_row(form.ordonnance.conge) }}
+        {{ form_end(form) }}
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Quantite</th>
+                            <th>Duree</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for prescription in consultation.ordonnance.prescriptions %}
+                            <tr>
+                                <td> {{ prescription.medicament.nom }}</td>
+                                <td> {{ prescription.quantite }}</td>
+                                <td>{{ prescription.duree }}</td>
+                                <td>
+                                    <button type="button"
+                                            url_modification="{{ path( 'modifier_description',{'id':prescription.id} ) }}"
+                                            class="btn btn-small button-modifier-medicament">Modifier
+                                    </button>
+                                    <button type="button"
+                                            url_suppression="{{ path( 'supprimer_description',{'id':prescription.id} ) }}"
+                                            class="btn btn-small btn-supprimer-medicament">Supprimer
+                                    </button>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Pas de medicaments</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <button type="button" id="btn-ajout-medicament" class="btn btn-success pull-right"> Ajouter
+                        medicament
+                    </button>
+                    <a class="button btn-primary" href="{{ path('imprimer_ordonnance', {'id': consultation.id}) }}">Imprimer</a>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+
+
+    <!-- Modal medicament -->
+    <div id="medicament-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Medicament</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" id="btn-sauvegarder-medicament" class="btn btn-success">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Modal antecedent -->
+    <div id="antecedent-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Antecedent</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" id="btn-sauvegarder-antecedent" class="btn btn-success">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Examen -->
+    <div id="examen-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Examens cliniques</h4>
+                </div>
+                <div class="modal-body" style="height: 300px;">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" id="btn-sauvegarder-examen" class="btn btn-success">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Analyse -->
+    <div id="analyse-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Analyse</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" id="btn-sauvegarder-analyse" class="btn btn-success">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal maladie -->
+    <div id="maladie-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Maladie</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" id="btn-sauvegarder-maladie" class="btn btn-success">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            //ajout d'un examen clinique
+            $('#btn-ajout-examen').click(function () {
+                $('#examen-modal .modal-body').html('');
+                $.ajax({
+                    url: "{{ path('ajout_examen', {'id': consultation.id}) }}",
+                    success: function (result) {
+                        $('#examen-modal .modal-body').html(result);
+                        $(".liste_examen").chosen({ width: '100%' });
+                    }
+                });
+                $('#examen-modal').modal();
+            });
+            //sauvegarde d'un examen clinique
+            $('#btn-sauvegarder-examen').click(function () {
+                $.ajax({
+                    type: "POST",
+                    data: $('.form-sauvegarder-examen').serialize(),
+                    url: $('.form-sauvegarder-examen').attr('action'),
+
+                    success: function (result) {
+                        if (result.status) {
+                            $('#examen-modal').modal('hide');
+                            location.reload();
+                        }
+                        else {
+                            $('#examen-modal .modal-body').html(result);
+                            $(".liste_examen").chosen({ width: '100%' });
+                        }
+                    }
+                });
+            });
+
+            //modification d'un examen
+            $('.button-modifier-examen').click(function () {
+                var $button = $(this);
+                $.ajax({
+                    url: $button.attr('url_modification'),
+                    'success': function (resultat) {
+                        $('#examen-modal .modal-body').html(resultat);
+                        $(".liste_examen").chosen({ width: '100%' });
+                    }
+                });
+                $('#examen-modal').modal();
+
+            });
+                 //ajout d'un antecedent
+            $('#btn-ajout-antecedent').click(function () {
+                $('#antecedent-modal .modal-body').html('');
+                $.ajax({
+                    url: "{{ path('ajout_antecedent', {'id': consultation.patient.id}) }}",
+                    success: function (result) {
+                        $('#antecedent-modal .modal-body').html(result);
+                        $(".liste_antecedents").chosen();
+                    }
+                });
+                $('#antecedent-modal').modal();
+            });
+            //sauvegarde d'un antecedent
+            $('#btn-sauvegarder-antecedent').click(function () {
+                $.ajax({
+                    type: "POST",
+                    data: $('.form-sauvegarder-antecedent').serialize(),
+                    url: $('.form-sauvegarder-antecedent').attr('action'),
+
+                    success: function (result) {
+                        if (result.status) {
+                            $('#antecedent-modal').modal('hide');
+                            location.reload();
+                        }
+                        else {
+                            $('#antecedent-modal .modal-body').html(result);
+                            $(".liste_antecedents").chosen();
+                        }
+                    }
+                });
+            });
+
+            //modification d'un antecedent
+            $('.button-modifier-antecedent').click(function () {
+                var $button = $(this);
+                $.ajax({
+                    url: $button.attr('url_modification'),
+                    'success': function (resultat) {
+                        $('#antecedent-modal .modal-body').html(resultat);
+                        $(".liste_antecedents").chosen();
+                    }
+                });
+                $('#antecedent-modal').modal();
+
+            });
+
+            //ajout d'un analyse
+            $('#btn-ajout-analyse').click(function () {
+                $('#analyse-modal .modal-body').html('');
+                $.ajax({
+                    url: "{{ path('ajout_analyse', {'id': consultation.id}) }}",
+                    success: function (result) {
+                        $('#analyse-modal .modal-body').html(result);
+                    }
+                });
+                $('#analyse-modal').modal();
+            });
+            //sauvegarde d'un analyse
+            $('#btn-sauvegarder-analyse').click(function () {
+                $.ajax({
+                    type: "POST",
+                    data: $('.form-sauvegarder-analyse').serialize(),
+                    url: $('.form-sauvegarder-analyse').attr('action'),
+
+                    success: function (result) {
+                        if (result.status) {
+                            $('#analyse-modal').modal('hide');
+                            location.reload();
+                        }
+                        else {
+                            $('#analyse-modal .modal-body').html(result);
+                        }
+
+                    }
+                });
+            });
+            //modification d'un analyse
+            $('.button-modifier-analyse').click(function () {
+                var $button = $(this);
+                $.ajax({
+                    url: $button.attr('url_modification'),
+                    'success': function (resultat) {
+                        $('#analyse-modal .modal-body').html(resultat);
+                    }
+                });
+                $('#analyse-modal').modal();
+
+            });
+
+            // ajout medicament
+            $('#btn-ajout-medicament').click(function () {
+                $('#medicament-modal .modal-body').html('');
+                $.ajax({
+                    url: "{{ path('ajout_description', {'id': consultation.ordonnance.id}) }}",
+                    success: function (result) {
+                        $('#medicament-modal .modal-body').html(result);
+                        $(".liste_medicament").chosen({ width: '100%' });
+                        $(".liste_examen").chosen({ width: '100%' });
+                    }
+                });
+                $('#medicament-modal').modal();
+            });
+
+            //sauvegarde medicament:
+            $('#btn-sauvegarder-medicament').click(function () {
+                $.ajax({
+                    type: "POST",
+                    data: $('.form-sauvegarder-medicament').serialize(),
+                    url: $('.form-sauvegarder-medicament').attr('action'),
+
+                    success: function (result) {
+                        if (result.status) {
+                            $('#medicament-modal').modal('hide');
+                            location.reload();
+                        }
+                        else {
+                            $('#medicament-modal .modal-body').html(result);
+                            $(".liste_medicament").chosen({ width: '100%' });
+                        }
+                    }
+                });
+            });
+            //modification de medicament
+            $('.button-modifier-medicament').click(function () {
+                var $button = $(this);
+                $.ajax({
+                    url: $button.attr('url_modification'),
+                    'success': function (resultat) {
+                        $('#medicament-modal .modal-body').html(resultat);
+                        $(".liste_medicament").chosen({ width: '100%' });
+
+                    }
+                });
+                $('#medicament-modal').modal();
+
+            });
+
+
+            //suppression de medicament
+            $('.btn-supprimer-medicament').click(function () {
+                var $button = $(this);
+                $.ajax({
+                    url: $button.attr('url_suppression'),
+                    success: function (result) {
+                        if (result.status) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+            //suppression de analyse
+            $('.btn-supprimer-analyse').click(function () {
+                var $button = $(this);
+                $.ajax({
+                    url: $button.attr('url_suppression'),
+                    success: function (result) {
+                        if (result.status) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+
+            //suppression de traitement
+            $('.btn-supprimer-examen').click(function () {
+                var $button = $(this);
+                $.ajax({
+                    url: $button.attr('url_suppression'),
+                    success: function (result) {
+                        if (result.status) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+
+        });
+
+        //ajout d'une maladie
+        $('#btn-ajout-maladie').click(function () {
+            $('#maladie-modal .modal-body').html('');
+            $.ajax({
+                url: "{{ path('patient_maladie', {'id': consultation.patient.id}) }}",
+                success: function (result) {
+                    $('#maladie-modal .modal-body').html(result);
+                }
+            });
+            $('#maladie-modal').modal();
+        });
+        //sauvegarde d'une maladie
+        $('#btn-sauvegarder-maladie').click(function () {
+            $.ajax({
+                type: "POST",
+                data: $('.form-sauvegarder-maladie').serialize(),
+                url: $('.form-sauvegarder-maladie').attr('action'),
+
+                success: function (result) {
+                    if (result.status) {
+                        $('#maladie-modal').modal('hide');
+                        location.reload();
+                    }
+                    else {
+                        $('#maladie-modal .modal-body').html(result);
+                    }
+                }
+            });
+        });
+
+        //suppression d'une maladie
+        $('.btn-supprimer-maladie').click(function () {
+            var $button = $(this);
+            $.ajax({
+                url: $button.attr('url_suppression'),
+                success: function (result) {
+                    if (result.status) {
+                        location.reload();
+                    }
+                }
+            });
+        });
+        //modification d'une maladie
+        $('.button-modifier-maladie').click(function () {
+            var $button = $(this);
+            $.ajax({
+                url: $button.attr('url_modification'),
+                'success': function (resultat) {
+                    $('#maladie-modal .modal-body').html(resultat);
+                }
+            });
+            $('#maladie-modal').modal();
+
+        });
+
+
+    </script>
+{% endblock %}

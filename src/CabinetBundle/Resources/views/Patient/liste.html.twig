@@ -1,0 +1,96 @@
+{% extends "base.html.twig" %}
+{% block main %}
+
+    <div class="row">
+        <div class="span4">
+            <div class="widget">
+                <div class="widget-header">
+                    <i class="icon-search"> </i>
+                    <h3> Recherche </h3>
+                </div>
+                <div class="widget-content form-recherche-patient">
+
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    <div class="span4">
+                        {{ form_row(form.code) }}
+                        {{ form_row(form.nom) }}
+                    </div>
+                    <div class="span4" style="z-index: 10000000000">
+                        {{ form_row(form.type) }}
+                        {{ form_row(form.prenom) }}
+                    </div>
+                    <div class="span4">
+                        {{ form_row(form.Chercher) }}
+                    </div>
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+        <div class="span8">
+            <div class="widget widget-table action-table">
+                <div class="widget-header">
+                    <i class="icon-th-list"></i>
+                    <h3>Liste des patients</h3>
+                    <a href="{{ path('ajout_patient') }}" class="btn btn-success pull-right ">Ajouter patient</a>
+                </div>
+                <div class="widget-content" id="all-data-search">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th> Patient</th>
+                            <th> Date de naissance</th>
+                            <th>Type de securite Sociale</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for patient in patients %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('fiche_patient', {'id': patient.id}) }}">{{ patient.nomComplet }} </a>
+                                </td>
+                                <td> {{ patient.dateNaissance|date('d/m/Y') }} </td>
+
+                                <td>
+                                    {% for securite in patient.securiteSocials%}
+                                     {{ securite.type}} - {{ securite.dateExpiration|date('d/m/Y') }}
+                                    {% else %}
+                                     Sans filiare
+                                    {% endfor %}
+
+                                </td>
+                                <td>
+                                {% if is_granted('ROLE_MEDECIN') %}
+                                    <a href="{{ path('dossier_medical' , {'id': patient.id}) }}"
+                                       class="btn btn-small "><i class="btn-icon-only icon-folder-open"></i>Dossier
+                                        medical</a>
+                                {% endif %}
+                                    <a href="{{ path('liste_securite_sociale' , {'id': patient.id} ) }}"
+                                       class="btn btn-small"><i class="btn-icon-only icon-ok"> </i>Securite
+                                        Sociale</a>
+                                <a href="{{ path('modifier_patient' , {'id': patient.id} ) }}"
+                                   class="btn btn-small btn-success"><i class="btn-icon-only icon-pencil"> </i>Modifier</a>
+
+                                {#<a href="{{ path('supprimer_patient' , {'id': patient.id}) }}"#}
+                                   {#class="btn btn-danger btn-small"><i#}
+                                            {#class="btn-icon-only icon-trash"> </i>Supprimer</a>#}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $(".liste_type_patient").chosen();
+        })
+    </script>
+{% endblock %}

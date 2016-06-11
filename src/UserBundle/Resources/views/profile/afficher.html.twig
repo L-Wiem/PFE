@@ -1,0 +1,148 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    {% if app.user.medecin %}
+        {% set personne = app.user.medecin %}
+    {% else %}
+        {% set personne = app.user.secretaire %}
+    {% endif %}
+
+    <div class="main-inner">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="span12">
+
+                    <div class="widget ">
+
+                        <div class="widget-header">
+                            <i class="icon-user"></i>
+                            <h3>Profile de
+                                : {{ app.user.medecin ? 'Docteur '~app.user.medecin.nomComplet : 'Secretaire ' ~ app.user.secretaire.nomComplet }}
+                            </h3>
+                        </div> <!-- /widget-header -->
+
+                        <div class="widget-content">
+
+                                        <form id="edit-profile" class="form-horizontal">
+                                            <fieldset>
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="Username">Nom
+                                                        d'utilisateur</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span6 disabled" id="username"
+                                                               value="{{ app.user.username }}" disabled>
+                                                    </div> <!-- /controls -->
+
+                                                </div> <!-- /control-group -->
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="medecin">Nom</label>
+                                                    <div class="controls">
+                                                        <input type="text" class="span6 disabled" id="username"
+                                                               value="{{ personne.nom }}" disabled>
+                                                    </div> <!-- /controls -->
+                                                </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="medecin">Prenom</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="span6 disabled" id="nom"
+                                                                   value="{{ personne.prenom }}" disabled>
+                                                        </div> <!-- /controls -->
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label"
+                                                                   for="medecin">Genre</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span6 disabled" id="nom"
+                                                                       value="{{ personne.genre }}" disabled>
+                                                            </div> <!-- /controls -->
+                                                        </div>
+
+                                                        <div class="control-group">
+                                                            <label class="control-label"
+                                                                   for="medecin">Date de naissance</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span6 disabled" id="nom"
+                                                                       value="{{ personne.dateNaissance|date('d/m/Y') }}" disabled>
+                                                            </div> <!-- /controls -->
+                                                        </div>
+                                                        <div class="control-group">
+                                                                <label class="control-label"
+                                                                       for="medecin">Etat civil</label>
+                                                                <div class="controls">
+                                                                    <input type="text" class="span6 disabled" id="nom"
+                                                                           value="{{ personne.etatCivil }}" disabled>
+                                                                </div> <!-- /controls -->
+                                                        </div>
+                                                        {% if app.user.medecin %}
+                                                        <div class="control-group">
+                                                                    <label class="control-label"
+                                                                           for="medecin">Matricule</label>
+                                                                    <div class="controls">
+                                                                        <input type="text" class="span6 disabled" id="nom"
+                                                                               value="{{ app.user.medecin.matricule }}" disabled>
+                                                                    </div> <!-- /controls -->
+                                                        </div>
+                                                                {% else %}
+                                                                    {% set secretaire = app.user.secretaire %}
+                                                                    <div class="control-group">
+                                                                        <label class="control-label"
+                                                                               for="secretaire">Cin</label>
+                                                                        <div class="controls">
+                                                                            <input type="text" class="span6 disabled" id="nom"
+                                                                                   value="{{ secretaire.cin }}" disabled>
+                                                                        </div> <!-- /controls -->
+                                                                    </div>
+                                                                    <div class="control-group">
+                                                                        <label class="control-label"
+                                                                               for="secretaire">Numero de contrat</label>
+                                                                        <div class="controls">
+                                                                            <input type="text" class="span6 disabled" id="nom"
+                                                                                   value="{{ secretaire.numContrat }}" disabled>
+                                                                        </div> <!-- /controls -->
+                                                                    </div>
+                                                                    <div class="control-group">
+                                                                        <label class="control-label"
+                                                                               for="secretaire">Date de debut de contrat</label>
+                                                                        <div class="controls">
+                                                                            <input type="text" class="span6 disabled" id="nom"
+                                                                                   value="{{ secretaire.dateDebContrat|date('d/m/Y') }}" disabled>
+                                                                        </div> <!-- /controls -->
+                                                                    </div>
+                                                                    <div class="control-group">
+                                                                        <label class="control-label"
+                                                                               for="secretaire">Date de fin de contrat</label>
+                                                                        <div class="controls">
+                                                                            <input type="text" class="span6 disabled" id="nom"
+                                                                                   value="{{ secretaire.dateFinContrat|date('d/m/Y') }}" disabled>
+                                                                        </div> <!-- /controls -->
+                                                                    </div>
+                                                                {% endif %}
+
+                                                                <div class="form-actions">
+                                                                    <a href="{{ path('modifier_profile', {'id': app.user.id}) }}"
+                                                                       class="btn btn-primary"><i class="btn-icon-only icon-pencil"> </i>Modifier profile</a>
+                                                                    <a href="{{ path('modifier_mot_de_passe', {'id': app.user.id}) }}"
+                                                                       class="btn btn-primary"><i class="btn-icon-only icon-pencil"> </i>Modifier mot de passe</a>
+
+                                                                </div> <!-- /form-actions -->
+                                            </fieldset>
+                                        </form>
+
+                        </div> <!-- /widget-content -->
+
+                    </div> <!-- /widget -->
+
+                </div> <!-- /span8 -->
+
+            </div> <!-- /row -->
+
+        </div> <!-- /container -->
+
+    </div> <!-- /main-inner -->
+
+
+{% endblock %}

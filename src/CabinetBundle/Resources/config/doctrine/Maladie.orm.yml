@@ -1,0 +1,22 @@
+CabinetBundle\Entity\Maladie:
+    type: entity
+    table: maladie
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+        symptome:
+            type: string
+        stade:
+            type: string
+        datePrescription:
+            type: date
+    manyToOne:
+        patient:
+            targetEntity: Patient
+            inversedBy: maladies

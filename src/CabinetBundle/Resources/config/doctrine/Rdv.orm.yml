@@ -1,0 +1,29 @@
+CabinetBundle\Entity\Rdv:
+    type: entity
+    table: rdv
+    repositoryClass: CabinetBundle\Entity\RdvRepository
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: date
+        heure:
+            type: time
+        preferences:
+            type: string
+            nullable: true
+    manyToOne:
+        creePar:
+            targetEntity: Secretaire
+            inversedBy: rdvs
+        patient:
+            targetEntity: Patient
+            inversedBy: rdvs
+    oneToOne:
+        consultation:
+            targetEntity: Consultation
+            inversedBy: rdv

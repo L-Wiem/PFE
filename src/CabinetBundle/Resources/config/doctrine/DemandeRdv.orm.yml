@@ -1,0 +1,22 @@
+CabinetBundle\Entity\DemandeRdv:
+    type: entity
+    table: demande_rdv
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        dateRdv:
+            type: date
+        heureRdv:
+            type: time
+        preferences:
+            type: string
+        confirmee:
+            type: boolean
+    manyToOne:
+        patient:
+            targetEntity: CabinetBundle\Entity\Patient
+            inversedBy: demandesRdvs

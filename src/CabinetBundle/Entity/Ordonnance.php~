@@ -1,0 +1,101 @@
+<?php
+
+namespace CabinetBundle\Entity;
+
+
+use Doctrine\Common\Collections\ArrayCollection;
+
+class Ordonnance
+{
+    /** @var  integer */
+    private $id;
+    /** @var  string */
+    private $description;
+    /** @var  string */
+    private $conge;
+    /** @var  Consultation */
+    private $consultation;
+    /** @var  Description[]|ArrayCollection */
+    private $descriptions;
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConge()
+    {
+        return $this->conge;
+    }
+
+    /**
+     * @param string $conge
+     */
+    public function setConge($conge)
+    {
+        $this->conge = $conge;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return Consultation
+     */
+    public function getConsultation()
+    {
+        return $this->consultation;
+    }
+
+    /**
+     * @param Consultation $consultation
+     */
+    public function setConsultation($consultation)
+    {
+        $this->consultation = $consultation;
+    }
+
+    /**
+     * @return Description[]|ArrayCollection
+     */
+    public function getDescriptions()
+    {
+        return $this->descriptions;
+    }
+
+    /**
+     * @param Description[]|ArrayCollection $descriptions
+     */
+    public function setDescriptions($descriptions)
+    {
+        $this->descriptions = $descriptions;
+    }
+    
+}

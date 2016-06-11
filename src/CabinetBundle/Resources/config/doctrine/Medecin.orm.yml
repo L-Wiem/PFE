@@ -1,0 +1,33 @@
+CabinetBundle\Entity\Medecin:
+    type: entity
+    table: medecin
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 30
+        prenom:
+            type: string
+            length: 30
+        dateNaissance:
+            type: date
+        adresse:
+            type: string
+            length: 150
+            nullable: true
+        numTel:
+            type: string
+            length: 20
+        genre:
+            type: string
+            length: 10
+    oneToOne:
+            user:
+                targetEntity: UserBundle\Entity\User
+                inversedBy: medecin
+                cascade: [persist]

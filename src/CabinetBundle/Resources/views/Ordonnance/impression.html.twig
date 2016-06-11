@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Ordonnance médicale cabinet Dr. {{ app.user.medecin.nomComplet }} </title>
+    <link href="{{ asset('bundles/cabinet/css/ordonnance.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="main">
+    <h2 align="right">Docteur: {{ app.user.medecin.nomComplet }} </h2>
+    <h5 align="right">Date consultation: {{ rdv.date|date('d/m/Y') }} </h5><br/><br/>
+    <p>Conseils therapeutique a: <strong>{{ rdv.patient.nomComplet }}</strong></p>
+    {% if ordonnance.description %}
+        <p>{{ ordonnance.description }}</p>
+    {% endif %}
+    {% if ordonnance.conge %}
+        <p>Congé: {{ ordonnance.conge }}</p>
+    {% endif %}
+
+    {% if ordonnance.prescriptions|length %}
+        <p>Medicaments: </p>
+        <ul>
+            {% for prescription in ordonnance.prescriptions %}
+                <li>
+                    <strong>{{ prescription.medicament.nom }}</strong>,
+                    quantité: {{ prescription.quantite }},
+                    durée: {{ prescription.duree }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p class="footer-dc">Docteur {{ app.user.medecin.nomComplet }}</p>
+</div>
+</body>
+</html>

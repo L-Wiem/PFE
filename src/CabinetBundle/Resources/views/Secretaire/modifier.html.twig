@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <div class="row">
+        <div class="span12">
+            <div class="widget ">
+                <div class="widget-header">
+                    <i class="icon-user"></i> <h3>Modifier secretaire</h3>
+                </div> <!-- /widget-header -->
+                <div class="widget-content row">
+                    {{ form_start(form) }}
+
+                    {{ form_errors(form) }}
+
+                    {{ form_row(form.genre) }}
+                    {{ form_row(form.nom) }}
+                    {{ form_row(form.prenom) }}
+                    {{ form_row(form.cin) }}
+                    {{ form_row(form.num_contrat) }}
+                    {{ form_row(form.date_naissance) }}
+                    {{ form_row(form.adresse) }}
+                    {{ form_row(form.num_tel) }}
+                    {{ form_row(form.user.username) }}
+                    {{ form_row(form.user.password) }}
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

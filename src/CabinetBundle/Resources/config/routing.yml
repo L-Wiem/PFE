@@ -1,0 +1,185 @@
+cabinet_homepage:
+    path:     /
+    defaults: { _controller: CabinetBundle:RendezVous:liste }
+setup:
+    path:     /configuration
+    defaults: { _controller: CabinetBundle:Accueil:setup }
+profile:
+    path:     /profile
+    defaults: {_controller: CabinetBundle:Medecin:profile}
+
+#secretaires routes:
+liste_secretaires:
+    path:     /secretaires-liste
+    defaults: {_controller: CabinetBundle:Secretaire:liste}
+ajout_secretaire:
+    path:     /secretaires-ajouter
+    defaults: {_controller: CabinetBundle:Secretaire:ajout}
+modifier_secretaire:
+    path:     /secretaires-modifier/{id}
+    defaults: {_controller: CabinetBundle:Secretaire:modifier}
+supprimer_secretaire:
+    path:     /secretaires-supprimer/{id}
+    defaults: {_controller: CabinetBundle:Secretaire:supprimer}
+# patients routes
+ajout_patient:
+    path:     /ajouter-patient
+    defaults: { _controller: CabinetBundle:Patient:ajout }
+ajout_from_user:
+    path:     /ajouter-patient-from-user/{id}
+    defaults: {_controller: CabinetBundle:Patient:ajoutFromUser}
+modifier_patient:
+    path:     /modifier-patient/{id}
+    defaults: { _controller: CabinetBundle:Patient:modifier}
+liste_patient:
+    path:     /liste-patients
+    defaults: { _controller: CabinetBundle:Patient:liste }
+fiche_patient:
+    path:     /fiche-patient/{id}
+    defaults: { _controller: CabinetBundle:Patient:fiche }
+#supprimer_patient:
+#    path:     /supprimer-patient/{id}
+#    defaults: { _controller: CabinetBundle:Patient:supprimer }
+
+#rdvs routes
+liste_rdv:
+    path:     /liste-rendez-vous
+    defaults: { _controller: CabinetBundle:RendezVous:liste}
+ajout_rdv:
+    path:     /ajouter-rendez-vous/{date}
+    defaults: { _controller: CabinetBundle:RendezVous:ajout}
+annuler_rdv:
+    path:     /annuler-rdv/{id}
+    defaults: { _controller: CabinetBundle:RendezVous:annuler }
+modifier_rdv:
+    path:     /modifier-rdv/{id}
+    defaults: { _controller: CabinetBundle:RendezVous:modifier }
+afficher_rdv:
+    path:     /rdv/{date}
+    defaults: {_controller: CabinetBundle:RendezVous:afficher}
+#consultation routes
+commencer_consultation:
+    path:     /commencer-consultation/{id}
+    defaults: { _controller: CabinetBundle:Consultation:commencer }
+#patient maladie:
+patient_maladie:
+    path:     /maladie/{id}
+    defaults: { _controller: CabinetBundle:PatientMaladie:ajout }
+modifier_patientMaladie:
+    path:     /maladie/modifier/{id}
+    defaults: { _controller: CabinetBundle:PatientMaladie:modifier }
+supprimer_patientMaladie:
+    path:     /maladie/supprimer/{id}
+    defaults: { _controller: CabinetBundle:PatientMaladie:supprimer }
+#ordonnance routes:
+ajout_description:
+    path:     /ajout-description/{id}
+    defaults: {_controller: CabinetBundle:Ordonnance:ajoutMedicament}
+modifier_description:
+    path:     /modifier-description/{id}
+    defaults: {_controller: CabinetBundle:Ordonnance:modifierMedicament}
+supprimer_description:
+    path:     /supprimer-description/{id}
+    defaults: {_controller: CabinetBundle:Ordonnance:supprimerMedicament}
+imprimer_ordonnance:
+    path:     /ordonnance/{id}
+    defaults: {_controller: CabinetBundle:Consultation:imprimerOrdonnance}
+#medicaments routes
+liste_medicaments:
+    path:     /liste-medicaments
+    defaults: { _controller: CabinetBundle:Medicament:liste}
+ajout_medicament:
+    path:     /ajouter-medicament
+    defaults: { _controller: CabinetBundle:Medicament:ajout }
+modifier_medicament:
+    path:     /modifier-medicament/{id}
+    defaults: { _controller: CabinetBundle:Medicament:modifier }
+supprimer_medicament:
+    path:     /supprimer-medicament/{id}
+    defaults: { _controller: CabinetBundle:Medicament:supprimer }
+#maladies routes
+liste_maladies:
+    path:     /liste-maladies
+    defaults: { _controller: CabinetBundle:Maladie:liste}
+ajout_maladie:
+    path:     /ajouter-maladie
+    defaults: { _controller: CabinetBundle:Maladie:ajout }
+modifier_maladie:
+    path:     /modifier-maladie/{id}
+    defaults: { _controller: CabinetBundle:Maladie:modifier }
+supprimer_maladie:
+    path:     /supprimer-maladie/{id}
+    defaults: { _controller: CabinetBundle:Maladie:supprimer }
+#dossiers-medicaux routes:
+dossier_medical:
+    path:     /dossier-medical/{id}
+    defaults: {_controller: CabinetBundle:DossierMedical:afficher}
+#examens cliniques routes:
+ajout_examen:
+    path:     /examenClinique/{id}
+    defaults: {_controller: CabinetBundle:ExamenClinique:ajout}
+modifier_examen:
+    path:     /modifier-examenClinique/{id}
+    defaults: {_controller: CabinetBundle:ExamenClinique:modifier}
+supprimer_examen:
+    path:     /supprimer-examenClinique/{id}
+    defaults: {_controller: CabinetBundle:ExamenClinique:supprimer}
+#analyses routes:
+ajout_analyse:
+    path:     /ajout-analyse/{id}
+    defaults: {_controller: CabinetBundle:Analyse:ajout}
+modifier_analyse:
+    path:     /modifier-analyse/{id}
+    defaults: {_controller: CabinetBundle:Analyse:modifier}
+supprimer_analyse:
+    path:     /supprimer-analyse/{id}
+    defaults: {_controller: CabinetBundle:Analyse:supprimer}
+#securite sociale routes:
+liste_securite_sociale:
+    path:    /liste-securite-social/{id}
+    defaults: {_controller: CabinetBundle:SecuriteSocial:liste}
+ajout_securite_sociale:
+    path:    /ajout-securite-social/{id}
+    defaults: {_controller: CabinetBundle:SecuriteSocial:ajout}
+modifier_securite_sociale:
+    path:    /modifier-securite-social/{securiteId}/{patientId}
+    defaults: {_controller: CabinetBundle:SecuriteSocial:modifier}
+supprimer_securite_sociale:
+    path:    /supprimer-securite-social/{id}
+    defaults: {_controller: CabinetBundle:SecuriteSocial:supprimer}
+
+#Antecedents routes:
+ajout_antecedent:
+    path:     /ajout-antecedent/{id}
+    defaults: {_controller: CabinetBundle:Antecedent:ajout}
+modifier_antecedent:
+    path:     /modifier-antecedent/{id}
+    defaults: {_controller: CabinetBundle:Antecedent:modifier}
+supprimer_antecedent:
+    path:     /supprimer-antecedent/{id}
+    defaults: {_controller: CabinetBundle:Antecedent:supprimer}
+
+#message routes:
+demande_rdv:
+    path:     /demandes-rdvs
+    defaults: {_controller: CabinetBundle:DemandeRdv:liste}
+ajout_rdv_from_mobile:
+    path:     /ajouter-rendez-vous-mobile/{id}
+    defaults: {_controller: CabinetBundle:DemandeRdv:ajoutFromMobile}
+rejet_demande:
+    path:     /rejeter-demandes-rdvs/{id}
+    defaults: {_controller: CabinetBundle:DemandeRdv:rejeter}
+
+notifier_rdv:
+    path:     /notifier/{id}
+    defaults: {_controller: CabinetBundle:MessagePatient:gcmSend}
+notifier_rdv_sms:
+    path:     /notifier-sms/{id}
+    defaults: {_controller: CabinetBundle:MessagePatient:sendSMS}
+#contact routes:
+liens_utiles:
+    path:     /liens-utiles
+    defaults: {_controller: CabinetBundle:Contact:liste}
+ajout_contact:
+    path:     /ajouter-contact
+    defaults: {_controller: CabinetBundle:Contact:ajout}

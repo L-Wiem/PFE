@@ -1,0 +1,18 @@
+CabinetBundle\Entity\ExamenClinique:
+    type: entity
+    table: examenClinique
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: string
+        resultat:
+            type: string
+    manyToOne:
+        consultation:
+            targetEntity: Consultation
+            inversedBy: examensCliniques

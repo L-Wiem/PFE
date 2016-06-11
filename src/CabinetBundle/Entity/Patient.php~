@@ -1,0 +1,131 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Wiem
+ * Date: 29/03/2016
+ * Time: 10:24
+ */
+
+namespace CabinetBundle\Entity;
+
+
+use Doctrine\Common\Collections\ArrayCollection;
+
+class Patient extends Personne
+{
+    /** @var  string */
+    private $code;
+    /** @var  DossierMedical */
+    private $dossierMedical;
+    /** @var  Secretaire */
+    private $creePar;
+    /** @var  SecuriteSocial */
+    private $securiteSocial;
+    /** @var  Consultation[] | ArrayCollection*/
+    private $consultations;
+    /** @var  Rdv[] | ArrayCollection */
+    private $rdvs;
+
+
+
+
+
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return DossierMedical
+     */
+    public function getDossierMedical()
+    {
+        return $this->dossierMedical;
+    }
+
+    /**
+     * @param DossierMedical $dossierMedical
+     */
+    public function setDossierMedical($dossierMedical)
+    {
+        $this->dossierMedical = $dossierMedical;
+    }
+
+    /**
+     * @return Secretaire
+     */
+    public function getCreePar()
+    {
+        return $this->creePar;
+    }
+
+    /**
+     * @param Secretaire $creePar
+     */
+    public function setCreePar($creePar)
+    {
+        $this->creePar = $creePar;
+    }
+
+    /**
+     * @return SecuriteSocial
+     */
+    public function getSecuriteSocial()
+    {
+        return $this->securiteSocial;
+    }
+
+    /**
+     * @param SecuriteSocial $securiteSocial
+     */
+    public function setSecuriteSocial($securiteSocial)
+    {
+        $this->securiteSocial = $securiteSocial;
+    }
+
+    /**
+     * @return Consultation[]|ArrayCollection
+     */
+    public function getConsultations()
+    {
+        return $this->consultations;
+    }
+
+    /**
+     * @param Consultation[]|ArrayCollection $consultations
+     */
+    public function setConsultations($consultations)
+    {
+        $this->consultations = $consultations;
+    }
+
+    /**
+     * @return Rdv[]|ArrayCollection
+     */
+    public function getRdvs()
+    {
+        return $this->rdvs;
+    }
+
+    /**
+     * @param Rdv[]|ArrayCollection $rdvs
+     */
+    public function setRdvs($rdvs)
+    {
+        $this->rdvs = $rdvs;
+    }
+    
+    
+}

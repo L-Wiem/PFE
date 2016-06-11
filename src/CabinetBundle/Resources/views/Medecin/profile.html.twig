@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <!-- /span6 -->
+    <div class="span6">
+        <div class="widget widget-table action-table">
+            <div class="widget-header"> <i class="icon-user"></i>
+                <h3>{{ app.user.medecin ? 'Docteur '~app.user.medecin.nomComplet : 'Secretaire ' ~ app.user.secretaire.nomComplet }}</h3>
+
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+                <table class="table table-striped table-bordered" border="0">
+                    {%  if is_granted('ROLE_MEDECIN') %}
+
+                        <ul>
+                            <td>
+                                <li> Nom: </li><br/>
+                                <li> Prenom:</li><br/>
+                                <li> Date de naissance: </li><br/>
+                                <li> Adresse: </li><br/>
+                                <li> Numero de telephone: </li><br/>
+                                <li> Matricule: </li><br/>
+                                <li> Username: </li><br/>
+                            </td>
+                            <td>
+                                <li> {{ app.user.medecin.nom }} </li><br/>
+                                <li> {{ app.user.medecin.prenom }}</li><br/>
+                                <li> {{ app.user.medecin.dateNaissance|date('d/m/Y')}} </li><br/>
+                                <li> {{ app.user.medecin.adresse }} </li><br/>
+                                <li> {{ app.user.medecin.numTel }} </li><br/>
+                                <li> {{ app.user.medecin.matricule }}</li><br/>
+                                <li> {{ app.user.username }}</li><br/>
+                            </td>
+                        </ul>
+
+                    {% else %}
+                    <ul>
+                    <td>
+                        <li> Nom: </li><br/>
+                        <li> Prenom:</li><br/>
+                        <li> Date de naissance: </li><br/>
+                        <li> Adresse: </li><br/>
+                        <li> Numero de telephone: </li><br/>
+                        <li> Numero de contrat: </li><br/>
+                        <li> Username: </li><br/>
+                    </td>
+                        <td>
+                            <li> {{ app.user.secretaire.nom }}</li><br/>
+                            <li> {{ app.user.secretaire.prenom }}</li><br/>
+                            <li> {{ app.user.secretaire.dateNaissance|date('d/m/Y') }} </li><br/>
+                            <li> {{ app.user.secretaire.adresse }} </li><br/>
+                            <li> {{ app.user.secretaire.numTel }}</li><br/>
+                            <li> {{ app.user.secretaire.numContrat }}</li><br/>
+                            <li> {{ app.user.username }}</li><br/>
+                        </td>
+                    </ul>
+                    {% endif %}
+
+
+                </table>
+            </div>
+            <!-- /widget-content -->
+        </div>
+        <!-- /widget -->
+    </div>
+    <!-- /span6 -->
+    <div class="span6">
+
+    </div>
+{% endblock %}

@@ -1,0 +1,123 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Wiem
+ * Date: 29/03/2016
+ * Time: 10:54
+ */
+
+namespace CabinetBundle\Entity;
+
+
+class Rdv
+{
+    /** @var  integer */
+    private $id;
+    /** @var  Patient */
+    private $patient;
+    /** @var  \DateTime */
+    private $date;
+    /** @var  string */
+    private $heure;
+    /** @var  Secretaire */
+    private $creePar;
+    /** @var  Consultation */
+    private $consultation;
+    
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return Secretaire
+     */
+    public function getCreePar()
+    {
+        return $this->creePar;
+    }
+
+    /**
+     * @param Secretaire $creePar
+     */
+    public function setCreePar($creePar)
+    {
+        $this->creePar = $creePar;
+    }
+
+    /**
+     * @return Patient
+     */
+    public function getPatient()
+    {
+        return $this->patient;
+    }
+
+    /**
+     * @param Patient $patient
+     */
+    public function setPatient($patient)
+    {
+        $this->patient = $patient;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeure()
+    {
+        return $this->heure;
+    }
+
+    /**
+     * @param string $heure
+     */
+    public function setHeure($heure)
+    {
+        $this->heure = $heure;
+    }
+    /**
+     * @return Consultation
+     */
+    public function getConsultation()
+    {
+        return $this->consultation;
+    }
+
+    /**
+     * @param Consultation $consultation
+     */
+    public function setConsultation($consultation)
+    {
+        $this->consultation = $consultation;
+    }
+    
+}

@@ -1,0 +1,29 @@
+UserBundle\Entity\MobileUser:
+    type: entity
+    table: mobile_user
+
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+        prenom:
+            type: string
+        genre:
+            type: string
+        deviceId:
+            type: string
+            nullable: true
+        username:
+            type: string
+        password:
+            type: string
+    oneToOne:
+        patient:
+              targetEntity: CabinetBundle\Entity\Patient
+              inversedBy: mobileUser
+

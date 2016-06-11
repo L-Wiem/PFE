@@ -1,0 +1,18 @@
+login:
+    path:     /login
+    defaults: { _controller: UserBundle:Security:login }
+afficher_profile:
+    path:     /profile
+    defaults: {_controller: UserBundle:Profile:afficher}
+modifier_mot_de_passe:
+    path:     /modifier-mot-de-passe/{id}
+    defaults: {_controller: UserBundle:Profile:modifierPassword}
+modifier_profile:
+    path:     /modifier-profile/{id}
+    defaults: {_controller: UserBundle:Profile:modifierProfile}
+mobile_user:
+    path:     /utilisateurs-mobile
+    defaults: {_controller: UserBundle:MobileUser:liste}
+rejet_user:
+    path:     /rejeter-mobile-user/{id}
+    defaults: {_controller: UserBundle:MobileUser:rejeter}

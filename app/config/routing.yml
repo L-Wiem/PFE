@@ -1,0 +1,20 @@
+api:
+    resource: "@ApiBundle/Resources/config/routing.yml"
+    prefix:   /api/
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+cabinet:
+    resource: "@CabinetBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login_check:
+    path: /login_check
+logout_check:
+    path: /logout
+
+# app/config/routing.yml
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

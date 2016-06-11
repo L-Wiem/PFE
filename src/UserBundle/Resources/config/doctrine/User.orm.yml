@@ -1,0 +1,30 @@
+UserBundle\Entity\User:
+    type: entity
+    table: user
+#primary key
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+        password:
+            type: string
+        roles:
+            type: array
+            nullable: true
+        salt:
+            type: string
+            length: 40
+            nullable: true
+        enabled:
+            type: boolean
+    oneToOne:
+            secretaire:
+              targetEntity: CabinetBundle\Entity\Secretaire
+              mappedBy: user
+            medecin:
+              targetEntity: CabinetBundle\Entity\Medecin
+              mappedBy: user

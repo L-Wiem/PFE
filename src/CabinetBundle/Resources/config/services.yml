@@ -1,0 +1,12 @@
+services:
+    cabinet.request_listener:
+        class: CabinetBundle\EventListener\RequestListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+        arguments: [ '@doctrine', '@router' ]
+
+    validateur.heure.rdv:
+        class: CabinetBundle\Validator\Constraints\HeureRDVValidator
+        tags:
+            - { name: validator.constraint_validator }
+        arguments: [ '@doctrine' ]

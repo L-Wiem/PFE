@@ -1,0 +1,21 @@
+api_list_demande_rdv:
+    path:     /list-demande-rdv
+    defaults: { _controller: ApiBundle:DemandeRdv:list }
+api_ajout_demande_rdv:
+    path:     /ajout-demande-rdv
+    defaults: { _controller: ApiBundle:DemandeRdv:ajout }
+api_modifier_demande_rdv:
+    path:     /modifier-demande-rdv
+    defaults: { _controller: ApiBundle:DemandeRdv:modifier }
+api_supprimer_demande_rdv:
+    path:     /supprimer-demande-rdv
+    defaults: { _controller: ApiBundle:DemandeRdv:supprimer }
+api_ajout_mobile_user:
+    path:     /ajout-mobile-user
+    defaults: {_controller: ApiBundle:MobileUser:ajout}
+api_login_mobile_user:
+    path:     /login-mobile-user
+    defaults: {_controller: ApiBundle:MobileUser:login}
+api_mobile_user_set_deviceId:
+    path:     /mobile-user-set-device-id
+    defaults: {_controller: ApiBundle:MobileUser:setDeviceID}

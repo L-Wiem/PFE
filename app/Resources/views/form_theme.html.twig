@@ -1,0 +1,15 @@
+{% extends 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block form_group_class -%}
+    col-sm-10 controls
+{%- endblock form_group_class %}
+
+{% block form_row -%}
+    <div class="control-group form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        <div class="{{ block('form_group_class') }}">
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+        {##}</div>
+{%- endblock form_row %}

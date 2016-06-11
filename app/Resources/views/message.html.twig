@@ -1,0 +1,21 @@
+{% if app.session and app.session.flashBag.has('notice_green_panel') %}
+    <div class="alert alert-block alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <ul>
+            {% for flashMessage in app.session.flashbag.get('notice_green_panel') %}
+                <li>{{ flashMessage|trans }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% if app.session and app.session.flashBag.has('notice_red_panel') %}
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <ul>
+            {% for flashMessage in app.session.flashbag.get('notice_red_panel') %}
+                <li>{{ flashMessage|trans }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

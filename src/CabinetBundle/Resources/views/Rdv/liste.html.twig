@@ -1,0 +1,111 @@
+{% extends "base.html.twig" %}
+
+{% block style %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/cabinet/js/full-calendar/fullcalendar.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+    <!-- /span6 -->
+    <div class="span8">
+        <div class="widget widget-table action-table">
+            <div class="widget-header"><i class="icon-calendar"></i>
+                <h3>Liste des rendez-vous le {{ date|date('d/m/Y') }}</h3>
+                {% if date|date('d/m/Y') >=  ("now"|date("d/m/Y")) %}
+
+                    <a href="{{ path('ajout_rdv', {'date':date|date('Y-m-d') }) }}" class="btn btn-success">Ajouter
+                        rendez-vous</a>
+                {% endif %}
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th> Patient</th>
+                        <th> Date</th>
+                        <th> Heure</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rdv in rdvs %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('fiche_patient', {'id':rdv.patient.id}) }}">{{ rdv.patient.nomComplet }}</a>
+                            </td>
+                            <td> {{ rdv.date|date('d/m/Y') }} </td>
+                            <td> {{ rdv.heure|date('H:i') }} </td>
+                            <td>
+                                <a href="{{ path('modifier_rdv', {'id':rdv.id}) }}" class="btn btn-small btn-success"><i
+                                            class="btn-icon-only icon-ok"> </i>Modifier</a>
+                                {% if is_granted('ROLE_MEDECIN') %}
+                                    {% if rdv.date|date('d/m/Y') ==  ("now"|date("d/m/Y")) %}
+                                        <a href="{{ path('commencer_consultation', {'id':rdv.id}) }}"
+                                           class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i>Commencer</a>
+                                    {% endif %}
+                                {% endif %}
+                                <a href="{{ path('notifier_rdv_sms', {'id':rdv.id}) }}"
+                                   class="btn btn-success btn-small"><i
+                                            class="btn-icon-only icon-ok"> </i>SMS</a>
+
+                                {% if rdv.patient.mobileUser and rdv.patient.mobileUser.deviceId %}
+                                    <a href="{{ path('notifier_rdv', {'id':rdv.id}) }}"
+                                       class="btn btn-success btn-small"><i
+                                                class="btn-icon-only icon-ok"> </i>Notifier</a>
+                                {% endif %}
+                                <a href="{{ path('annuler_rdv', {'id':rdv.id}) }}" class="btn btn-danger btn-small"><i
+                                            class="btn-icon-only icon-remove"> </i>Annuler</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /widget-content -->
+
+        </div>
+    </div>
+
+    <div class="span4">
+        <!-- /widget-header -->
+        <div class="widget-content">
+            <div id='calendar'>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/cabinet/js/full-calendar/moment.min.js') }}"></script>
+    <script src="{{ asset('bundles/cabinet/js/full-calendar/fullcalendar.min.js') }} "></script>
+    <script src="{{ asset('bundles/cabinet/js/full-calendar/fr.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+            var calendar = $('#calendar').fullCalendar({
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'prev,next today'
+                },
+                selectable: true,
+                selectHelper: true,
+                lang: 'fr',
+                select: function (start, end, allDay) {
+
+                    var m = $.fullCalendar.moment(start);
+                    m.stripTime();
+                    window.location.href = Routing.generate('afficher_rdv', {date: m.format()})
+                },
+                editable: true
+            });
+        });
+    </script><!-- /Calendar -->
+{% endblock %}

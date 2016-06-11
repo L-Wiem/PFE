@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Cabinet Dr. F.Olfa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="{{ asset('bundles/cabinet/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/bootstrap-responsive.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/google-font.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/pages/signin.css') }}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <div class="container">
+
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <a class="brand" href="index.html">
+                    Bienvenue
+                </a>
+
+            </div>
+        </div> <!-- /container -->
+    </div> <!-- /navbar-inner -->
+</div> <!-- /navbar -->
+
+<div class="account-container">
+    {% include "message.html.twig" %}
+    <div class="content clearfix">
+
+        <form action="{{ path('login_check') }}" method="post">
+
+            <h1>Authentification </h1>
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div class="login-fields">
+
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="_username" value="" placeholder="Nom d'utilisateur"
+                           class="login username-field"/>
+                </div> <!-- /field -->
+
+                <div class="field">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" value="" placeholder="Mot de passe"
+                           class="login password-field"/>
+                </div> <!-- /password -->
+
+            </div> <!-- /login-fields -->
+
+            <div class="login-actions">
+                <button class="button btn btn-success btn-large">Connexion</button>
+
+            </div> <!-- .actions -->
+
+
+        </form>
+
+    </div> <!-- /content -->
+
+</div> <!-- /account-container -->
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{{ asset('bundles/cabinet/js/jquery-1.7.2.min.js') }}"></script>
+<script src="{{ asset('bundles/cabinet/js/bootstrap.js') }}"></script>
+<script src="{{ asset('bundles/cabinet/js/signin.js') }}"></script>
+</body>
+</html>

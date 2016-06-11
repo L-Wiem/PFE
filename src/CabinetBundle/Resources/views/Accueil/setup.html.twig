@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Bienvenue dans l'application CabiNet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="{{ asset('bundles/cabinet/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/bootstrap-responsive.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/google-font.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/pages/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/cabinet/css/pages/signin.css') }}" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container" style="color: white;">
+            Bienvenue dans l'application CabiNet
+        </div> <!-- /container -->
+    </div> <!-- /navbar-inner -->
+</div> <!-- /navbar -->
+
+
+<div class="account-container register">
+    <div class="content clearfix">
+        <h3>Créer le compte du Médecin</h3>
+        <hr>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.genre) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.date_naissance) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.num_tel) }}
+        {{ form_row(form.matricule) }}
+        <hr>
+        <h3>Entrer vos paramètres d'accès au CabiNet</h3>
+        <hr>
+        {{ form_row(form.user.username) }}
+        {{ form_row(form.user.password) }}
+        {{ form_end(form) }}
+    </div>
+
+    <script src="{{ asset('bundles/cabinet/js/jquery-1.7.2.min.js') }}"></script>
+    <script src="{{ asset('bundles/cabinet/js/bootstrap.js') }}"></script>
+
+    <script src="{{ asset('bundles/cabinet/js/signin.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+<form method="post" action="{{ path('modifier_analyse', {'id': analyse.id}) }}" class="form-sauvegarder-analyse" >
+    {{ form_errors(form) }}
+
+    {{ form_row(form.type) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form._token) }}
+
+</form>
